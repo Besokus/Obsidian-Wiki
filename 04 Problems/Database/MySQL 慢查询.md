@@ -1,4 +1,4 @@
-﻿---
+---
 type: problem
 domain: database
 topic:

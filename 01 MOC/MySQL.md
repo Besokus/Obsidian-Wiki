@@ -1,4 +1,4 @@
-﻿---
+---
 type: moc
 domain: database
 topic:
