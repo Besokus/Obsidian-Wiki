@@ -1,0 +1,88 @@
+﻿---
+type: concept
+domain: database
+topic:
+  - mysql
+  - index
+status: learning
+difficulty: medium
+mastery: seen
+source: "[[MySQL学习笔记]]"
+created: 2026-05-09
+reviewed:
+next_review:
+---
+
+# MySQL 索引
+
+## 一句话解释
+索引是 MySQL 为了更快定位数据而维护的有序数据结构。它用额外的存储和写入维护成本，换取查询效率。
+
+## 它解决什么问题
+- 减少全表扫描，降低磁盘 IO。
+- 支持高效过滤、排序和分组。
+- 帮助优化器选择更低成本的查询路径。
+
+## 前置知识
+理解它之前最好先知道什么？
+
+- [[]]
+
+## 什么时候用
+- 数据量较大且查询频繁的表。
+- 经常出现在 `where`、`order by`、`group by`、`join` 条件中的字段。
+- 区分度高的字段，例如用户 ID、手机号、订单号。
+
+## 什么时候不用
+- 小表或低频查询不一定需要索引。
+- 频繁写入但很少查询的字段不应盲目加索引。
+- 区分度很低的字段单独建索引通常收益有限。
+
+## 核心机制
+```text
+1. 建立索引结构，保存索引列到数据位置的映射。
+2. 查询时先走索引定位候选数据。
+3. 如果索引不能覆盖所有返回列，可能需要回表。
+```
+
+## 开发者视角
+- 索引能提升查询，但会降低 `insert`、`update`、`delete`。
+- 索引不是越多越好，过多索引会增加存储和维护成本。
+- 优先设计联合索引，而不是给每个字段都建单列索引。
+- 用 [[EXPLAIN]] 验证索引是否被使用，而不是凭感觉判断。
+
+## 工程判断
+遇到真实问题时，如何判断是否该用它？需要看哪些证据？
+
+- 判断信号：
+- 关键权衡：
+- 常见替代方案：
+
+## 最小例子
+```sql
+create index idx_user_name on tb_user(name);
+create unique index idx_user_phone on tb_user(phone);
+create index idx_user_pro_age_status on tb_user(profession, age, status);
+show index from tb_user;
+drop index idx_user_name on tb_user;
+```
+
+## 常见误解
+- 
+
+## 易混概念
+- [[B+Tree 索引]]：MySQL 最常见的索引结构。
+- [[聚簇索引与二级索引]]：InnoDB 中索引的存储形式。
+- [[覆盖索引与回表]]：影响查询是否需要二次查表。
+- [[MySQL 索引失效]]：索引用不上或只用上一部分。
+
+## 相关笔记
+- [[MySQL 最左前缀法则]]
+- [[MySQL 慢查询]]
+
+## 我的理解
+索引是查询性能优化的入口，但不是银弹。开发者真正要掌握的是：某个查询为什么能利用索引、为什么不能利用索引、利用索引后还要不要回表。
+
+## 待补充
+- [ ] 整理常见业务查询的索引设计案例。
+

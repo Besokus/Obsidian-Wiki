@@ -1,0 +1,23 @@
+# Editor / IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian workspace (personal state)
+.obsidian/
+
+# AI assistant configs
+.claude/
+.claudian/*
+!README.md
+copilot/
+
+# Large notes yet to be split into atomic concepts
+/C++笔记.md
+/MySQL学习笔记.md
+/后端岗位面试题.md
+/数据结构与算法.md
+/幂等性.md
