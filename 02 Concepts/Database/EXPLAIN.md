@@ -37,17 +37,17 @@ EXPLAIN 用来查看 MySQL 如何执行一条 SELECT 语句，包括访问顺序
 - 为慢查询优化提供证据。
 
 ## 核心字段
-| 字段 | 作用 |
-|---|---|
-| id | 查询执行序号，id 越大通常越先执行 |
-| select_type | 查询类型，例如 SIMPLE、PRIMARY、UNION、SUBQUERY |
-| type | 连接类型，常用于判断访问效率 |
-| possible_keys | 可能使用的索引 |
-| key | 实际使用的索引 |
-| key_len | 使用到的索引字节长度 |
-| rows | 预计扫描行数 |
-| filtered | 过滤后保留行的比例估计 |
-| Extra | 额外信息，例如 Using index、Using where |
+| 字段            | 作用                                    |
+| ------------- | ------------------------------------- |
+| id            | 查询执行序号，id 越大通常越先执行                    |
+| select_type   | 查询类型，例如 SIMPLE、PRIMARY、UNION、SUBQUERY |
+| type          | 连接类型，常用于判断访问效率                        |
+| possible_keys | 可能使用的索引                               |
+| key           | 实际使用的索引                               |
+| key_len       | 使用到的索引字节长度                            |
+| rows          | 预计扫描行数                                |
+| filtered      | 过滤后保留行的比例估计                           |
+| Extra         | 额外信息，例如 Using index、Using where       |
 
 ## 重点部分详解
 - 机制细节：EXPLAIN 给的是执行计划，不是实际执行结果，但足够作为第一轮优化依据。
